@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Bank One International</title>
-  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -65,7 +65,7 @@ list_alt
       <h5 id="loans">Loans</h5>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <h4>Whats my total at the end of the year?</h4>
-      <form class="" action="" method="post">
+      <form class="" action="" method="post" onsubmit="event.preventDefault()">
         <input type="number" name="weeks" id="value">
         <input type="submit" name="value" value="calculate" onclick="total()">
       </form>
@@ -97,7 +97,15 @@ close
     </div>
      <script>
 
+     $('#hamburger').hover(function(){
+       $(this).html('menu_open')
+     },
+      function(){
+        $(this).html('menu')
+      }
+   )
 
+/*
 //Selecting hamburger element
 var hamMenu = document.getElementById('hamburger')
 //Adding mouseover event
@@ -114,8 +122,40 @@ function closeMenu(){
 
   hamMenu.innerHTML = "menu"
 }
+*/
+
+$(document).ready(function(){
+
+    $('#modal').addClass('modal_on').animate({
+
+      top:'250px'
+
+    },1500)
+
+    $('#close').click(function(){
+      $('#modal').removeClass('modal_on')
+    })
+
+})
+
+//toggle hide/show content
+
+$('h5+p').hide()
+
+$('#savings').click(function(){
+
+  $('#savings+p').slideToggle();
+
+})
+
+$('#loans').click(function(){
+
+  $("#loans+p").slideToggle();
+
+})
 
 
+/*
 //window load modal function
 var modal = document.getElementById('modal')
 var btns = document.getElementsByTagName('button')
@@ -131,6 +171,31 @@ window.onload = function(){
     modal.classList.remove('modal_on')
 
   })
+
+}
+*/
+
+
+btns[0].addEventListener('click',winOpen)
+
+function winOpen(){
+
+  window.open('account.html','_blank','width=400,height=600')
+
+}
+
+var weeksSaving = document.getElementById('value')
+var userMsg = document.getElementById('msg')
+
+function sum(x){
+
+return x * 52
+
+}
+
+function total(){
+
+  userMsg.innerHTML = "Year end savings total is $" + sum(weeksSaving.value)
 
 }
 
